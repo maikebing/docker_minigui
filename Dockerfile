@@ -15,8 +15,8 @@ RUN  cd ~/ && \
      cd 3rd-party/chipmunk-5.3.1 && \
      cmake . && \
      make; sudo make install &&  \
-     cd ../.. && tools/toolchain_R2_EABI.tar.zip  /work/ && \
-	 unzip 
+     cd ../.. && \
+	 unzip tools/toolchain_R2_EABI.tar.zip  /work/ && \
      cd minigui-res && \
      ./autogen.sh && \
      ./configure --prefix=/work/toolchain_R2_EABI/usr/arm-unknown-linux-gnueabi/sysroot/usr && \
@@ -25,5 +25,5 @@ RUN  cd ~/ && \
 	 cd minigui && \
 	 chmod 777 ./buildMiniGui.sh ; ./buildMiniGui.sh && \
 	 make;  make install && \
-	 cd .. && \
+	 cd .. 
 
