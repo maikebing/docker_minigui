@@ -9,6 +9,8 @@ RUN  cd ~/ && \
      cd ~/build-minigui-3.2/  && \
      ./fetch-all.sh && \
      ./build-all.sh
+
+CMD ["/bin/bash"]
      
 
 
