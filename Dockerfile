@@ -7,7 +7,7 @@ RUN apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev l
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/build-minigui-3.2.git && \
      cd ~/build-minigui-3.2/ 
-RUN  ./fetch-all.sh 
+RUN  ./fetch-all.sh && \
      ./build-all.sh
      
 
