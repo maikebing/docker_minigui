@@ -15,6 +15,7 @@ RUN apt-get update && \
 RUN  cd /work/ && \
      cat toolchain_R2_EABI.tar.zip   > toolchain_R2_EABI.zip && \
 	  cat toolchain_R2_EABI.tar.z*   > toolchain_R2_EABI.zip && \
+	  zip -F  toolchain_R2_EABI.zip && \
 	 unzip toolchain_R2_EABI.zip && \
 	 mv ./toolchain_R2_EABI.tar.gz_ ./toolchain_R2_EABI.tar.gz  && \
 	 tar xzvf ./toolchain_R2_EABI.tar.gz
