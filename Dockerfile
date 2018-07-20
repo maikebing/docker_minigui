@@ -1,11 +1,13 @@
 FROM  i386/ubuntu:trusty
 RUN apt-get update
 RUN apt-get upgrade
-RUN apt-get install -y git
+RUN apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config
+RUN apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev
 
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/build-minigui-3.2.git && \
-     cd ~/build-minigui-3.2/ && \
+     cd ~/build-minigui-3.2/ 
+RUN  ./fetch-all.sh 
      ./build-all.sh
      
 
