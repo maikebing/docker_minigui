@@ -1,4 +1,11 @@
 FROM  i386/ubuntu:trusty
+COPY tools/toolchain_R2_EABI.tar.zip /work/
+COPY tools/toolchain_R2_EABI.tar.z01 /work/
+COPY tools/toolchain_R2_EABI.tar.z02 /work/
+COPY tools/toolchain_R2_EABI.tar.z03 /work/
+COPY tools/toolchain_R2_EABI.tar.z04 /work/
+COPY buildMiniGui.sh /work/
+COPY buildProject.sh /work/
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config zip unzip  && \
@@ -16,7 +23,7 @@ RUN  cd ~/ && \
      cmake . && \
      make; sudo make install &&  \
      cd ../.. && \
-	 unzip tools/toolchain_R2_EABI.tar.zip  /work/ && \
+	 unzip toolchain_R2_EABI.tar.zip  /work/ && \
      cd minigui-res && \
      ./autogen.sh && \
      ./configure --prefix=/work/toolchain_R2_EABI/usr/arm-unknown-linux-gnueabi/sysroot/usr && \
