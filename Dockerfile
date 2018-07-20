@@ -15,10 +15,11 @@ RUN  cd ~/ && \
      cd 3rd-party/chipmunk-5.3.1 && \
      cmake . && \
      make; sudo make install &&  \
-     cd ../.. && \
+     cd ../.. && tools/toolchain_R2_EABI.tar.zip  /work/ && \
+	 unzip 
      cd minigui-res && \
      ./autogen.sh && \
-     ./configure && \
+     ./configure --prefix=/work/toolchain_R2_EABI/usr/arm-unknown-linux-gnueabi/sysroot/usr && \
      make install && \
      cd ..  && \
 	 cd minigui && \
