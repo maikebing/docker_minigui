@@ -21,7 +21,8 @@ RUN  cd ~/ && \
      cd .. && \
      cd 3rd-party/chipmunk-5.3.1 && \
      cmake . && \
-     make; sudo make install &&  \
+     make && \
+	 make install &&  \
      cd /work/  && \	 
 	 unzip ./toolchain_R2_EABI.tar.zip && \
 	 cd cd ~/build-minigui-3.2/ && \
@@ -31,8 +32,10 @@ RUN  cd ~/ && \
      make install && \
      cd ..  && \
 	 cd minigui && \
-	 cp /work/buildMiniGui.sh ./
-	 chmod 777 ./buildMiniGui.sh ; ./buildMiniGui.sh && \
-	 make;  make install && \
+	 cp /work/buildMiniGui.sh ./  && \
+	 chmod 777 ./buildMiniGui.sh  && \
+	 ./buildMiniGui.sh && \
+	 make && \
+	 make install && \
 	 cd .. 
 
