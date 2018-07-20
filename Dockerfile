@@ -4,6 +4,11 @@ COPY tools/toolchain_R2_EABI.tar.z01 /work/
 COPY tools/toolchain_R2_EABI.tar.z02 /work/
 COPY tools/toolchain_R2_EABI.tar.z03 /work/
 COPY tools/toolchain_R2_EABI.tar.z04 /work/
+RUN  cd /work/ && \
+     cat toolchain_R2_EABI.tar.z* > toolchain_R2_EABI.zip && \
+	 unzip toolchain_R2_EABI.zip && \
+	 mv ./toolchain_R2_EABI.tar.gz_ ./toolchain_R2_EABI.tar.gz  && \
+	 tar xzvf ./toolchain_R2_EABI.tar.gz
 COPY buildMiniGui.sh /work/
 COPY buildProject.sh /work/
 RUN apt-get update && \
@@ -23,9 +28,7 @@ RUN  cd ~/ && \
      cmake . && \
      make && \
 	 make install &&  \
-     cd /work/  && \	 
-	 unzip ./toolchain_R2_EABI.tar.zip && \
-	 cd cd ~/build-minigui-3.2/ && \
+	 cd ~/build-minigui-3.2/ && \
      cd minigui-res && \
      ./autogen.sh && \
      ./configure --prefix=/work/toolchain_R2_EABI/usr/arm-unknown-linux-gnueabi/sysroot/usr && \
