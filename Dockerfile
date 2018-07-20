@@ -18,11 +18,11 @@ RUN  cd ~/ && \
      cd ../.. && \
      cd minigui-res && \
      ./autogen.sh && \
-      ./configure && \
-       make install && \
-       cd ..  && \
-     ./build-all.sh 
-
-
-
+     ./configure && \
+     make install && \
+     cd ..  && \
+	 cd minigui && \
+	 chmod 777 ./buildMiniGui.sh ; ./buildMiniGui.sh && \
+	 make;  make install && \
+	 cd .. && \
 
