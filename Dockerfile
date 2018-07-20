@@ -1,10 +1,7 @@
 FROM  i386/ubuntu:trusty
-COPY tools/toolchain_R2_EABI.tar.zip /work/
-COPY tools/toolchain_R2_EABI.tar.z01 /work/
-COPY tools/toolchain_R2_EABI.tar.z02 /work/
-COPY tools/toolchain_R2_EABI.tar.z03 /work/
-COPY tools/toolchain_R2_EABI.tar.z04 /work/
-
+COPY tools/toolchain.tar.gzaa /work/
+COPY tools/toolchain.tar.gzab /work/
+COPY tools/toolchain.tar.gzac /work/
 COPY buildMiniGui.sh /work/
 COPY buildProject.sh /work/
 RUN apt-get update && \
@@ -13,11 +10,7 @@ RUN apt-get update && \
     apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev
 
 RUN  cd /work/ && \
-     cat toolchain_R2_EABI.tar.zip   > toolchain_R2_EABI.zip && \
-	  cat toolchain_R2_EABI.tar.z*   > toolchain_R2_EABI.zip && \
-	  zip -F  toolchain_R2_EABI.zip  --out toolchain_R2_EABI_out.zip && \
-	 unzip toolchain_R2_EABI_out.zip && \
-	 mv ./toolchain_R2_EABI.tar.gz_ ./toolchain_R2_EABI.tar.gz  && \
+     cat toolchain.tar.gz* | tar xz && \
 	 tar xzvf ./toolchain_R2_EABI.tar.gz /work/ && \
 	 rm toolchain_R2_EABI*
 
