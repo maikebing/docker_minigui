@@ -39,4 +39,8 @@ RUN  cd ~/ && \
 	 make && \
 	 make install && \
 	 cd .. 
-
+RUN apt-get autoclean  && \
+    rm /var/cache/apt/archives/* && \
+	rm ~/build-minigui-3.2 -R && \
+	rm /work/toolchain_R2_EABI.tar.gz && \
+	rm /work/toolchain.tar.gz*
