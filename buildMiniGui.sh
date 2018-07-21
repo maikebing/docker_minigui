@@ -54,7 +54,7 @@ ac_cv_func_calloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes lt_cv_sys_lib_s
 	--host=arm-unknown-linux-gnueabi \
 	--build=i686-pc-linux-gnu \
 	--prefix=/work/toolchain_R2_EABI/usr/arm-unknown-linux-gnueabi/sysroot/usr \
-	 --enable-develmode --with-runmode=ths
+	 --enable-develmode --with-runmode=ths --with-ttfsupport=None --disable-videopcxvfb
 
 if [ -f "Makefile" ]; then
 	make clean
