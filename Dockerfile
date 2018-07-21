@@ -12,7 +12,7 @@ RUN apt-get update && \
 RUN  cd /work/ && \
      cat toolchain.tar.gz* | tar xz && \
 	 tar xzvf ./toolchain_R2_EABI.tar.gz /work/ && \
-	 rm toolchain_R2_EABI*
+	
 
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/build-minigui-3.2.git && \
