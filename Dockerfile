@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 RUN  cd /work/ && \
      cat toolchain.tar.gz* | tar xz && \
-	 tar xzvf ./toolchain_R2_EABI.tar.gz /work/ && \
+	 tar xzvf ./toolchain_R2_EABI.tar.gz  
 	
 
 RUN  cd ~/ && \
