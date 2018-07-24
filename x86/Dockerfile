@@ -21,7 +21,12 @@ RUN  cd ~/ && \
       ./configure && \
        make install && \
        cd ..  && \
-     ./build-all.sh 
+      runmode=ths && \
+	cd minigui  && \
+    ./autogen.sh  && \
+    ./configure --enable-develmode --with-runmode=$runmode  && \
+	make   && \
+	make install  
 
 
 
