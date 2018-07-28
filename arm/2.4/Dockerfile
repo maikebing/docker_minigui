@@ -10,6 +10,12 @@ RUN apt-get update && \
     apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config && \
     apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev
 
+RUN  cd /work/ && \
+     cat toolchain.tar.gz* | tar xz && \
+	 tar xzf ./toolchain_R2_EABI.tar.gz  \
+	 rm /work/toolchain_R2_EABI.tar.gz && \
+	 rm /work/toolchain.tar.gz*
+	
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/minigui2.4.git && \
 	 cp /work/buildMiniGui_2_4.sh ./  && \
@@ -17,3 +23,6 @@ RUN  cd ~/ && \
 	 ./buildMiniGui_2_4.sh && \
 	 make && \
 	 make install && 
+	 apt-get autoclean  && \
+     rm /var/cache/apt/archives/* -R && \
+	 rm -rf /var/lib/apt/lists/*
