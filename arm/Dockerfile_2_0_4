@@ -18,7 +18,7 @@ RUN  cd /work/ && \
 	
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/minigui2.4.git && \
-	 cp ./minigui2.4/ && \
+	 cd ./minigui2.4/ && \
 	 cp /work/buildMiniGui_2_0_4.sh ./  && \
 	 chmod 777 ./buildMiniGui_2_0_4.sh  && \
 	 ./buildMiniGui_2_0_4.sh && \
