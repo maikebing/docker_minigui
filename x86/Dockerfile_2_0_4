@@ -9,6 +9,7 @@ RUN  cd ~/ && \
     cd  ./minigui2.4/  && \
  	chmod 777 autogen.sh && \
 	./autogen.sh  && \
+	ln -s /usr/local/include/freetype2 /usr/local/include/freetype & \
 	./configure --prefix=/usr --enable-ttfsupport --enable-ft2support  --disable-pngsupport  && \
 	make clean  && \
 	make && \
