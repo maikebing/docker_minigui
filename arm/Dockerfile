@@ -4,6 +4,7 @@ COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
 COPY buildMiniGui_3_2.sh /work/
 COPY buildProject.sh /work/
+
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config zip unzip  && \
@@ -15,7 +16,6 @@ RUN  cd /work/ && \
 	 rm /work/toolchain_R2_EABI.tar.gz && \
 	 rm /work/toolchain.tar.gz*
 	
-
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/build-minigui-3.2.git && \
      cd ~/build-minigui-3.2/  && \
