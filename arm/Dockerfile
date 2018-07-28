@@ -2,8 +2,8 @@ FROM  i386/ubuntu:trusty
 COPY arm/tools/toolchain.tar.gzaa /work/
 COPY arm/tools/toolchain.tar.gzab /work/
 COPY arm/tools/toolchain.tar.gzac /work/
-COPY buildMiniGui_3_2.sh /work/
-COPY buildProject.sh /work/
+COPY /arm/buildMiniGui_3_2.sh /work/
+COPY /arm/buildProject.sh /work/
 RUN apt-get update && \
     apt-get upgrade && \
     apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config zip unzip  && \
