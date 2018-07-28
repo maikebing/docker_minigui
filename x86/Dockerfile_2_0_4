@@ -6,7 +6,8 @@ RUN apt-get update && \
 
 RUN  cd ~/ && \
      git clone https://github.com/maikebing/minigui2.4.git && \
-     chmod 777 autogen.sh && \
+    cd  ./minigui2.4/  && \
+ 	chmod 777 autogen.sh && \
 	./autogen.sh  && \
 	./configure --prefix=/usr --enable-ttfsupport --enable-ft2support  --disable-pngsupport  && \
 	make clean  && \

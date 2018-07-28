@@ -12,7 +12,7 @@ RUN apt-get update && \
 
 RUN  cd /work/ && \
      cat toolchain.tar.gz* | tar xz && \
-	 tar xzf ./toolchain_R2_EABI.tar.gz  \
+	 tar xzf ./toolchain_R2_EABI.tar.gz && \
 	 rm /work/toolchain_R2_EABI.tar.gz && \
 	 rm /work/toolchain.tar.gz*
 	
