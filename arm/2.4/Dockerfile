@@ -22,7 +22,7 @@ RUN  cd ~/ && \
 	 chmod 777 ./buildMiniGui_2_4.sh  && \
 	 ./buildMiniGui_2_4.sh && \
 	 make && \
-	 make install && 
+	 make install && \ 
 	 apt-get autoclean  && \
      rm /var/cache/apt/archives/* -R && \
 	 rm -rf /var/lib/apt/lists/*
