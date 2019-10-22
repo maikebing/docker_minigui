@@ -6,7 +6,7 @@ COPY arm/buildProject.sh /work/
 COPY arm/buildMiniGui_2_0_4.sh /work/
 
 RUN apt-get update && \
-    apt-get upgrade && \
+    apt-get upgrade -y && \
     apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config && \
     apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget
 
