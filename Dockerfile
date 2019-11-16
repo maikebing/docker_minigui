@@ -2,9 +2,8 @@ FROM  i386/ubuntu:trusty
 COPY tools/toolchain.tar.gzaa /work/
 COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
-COPY buildProject.sh /work/
 
-RUN apt-get update && \
+RUN apt-get -y -q update && \
 	apt-get -y -q upgrade && \
 	apt-get install -y -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config && \
 	apt-get install -y -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget 
