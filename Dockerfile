@@ -23,6 +23,7 @@ RUN  cd ~/ && \
 	./configure && \
 	make && \
 	make install && \
+	cd ~/ && \
 	git clone https://github.com/maikebing/minigui2.0.4.git && \
 	cd  ./minigui2.0.4/  && \
 	chmod 777 ./rebuildx86 && \
