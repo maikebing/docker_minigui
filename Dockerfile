@@ -1,28 +1,32 @@
 FROM  i386/ubuntu:trusty
+COPY tools/toolchain.tar.gzaa /work/
+COPY tools/toolchain.tar.gzab /work/
+COPY tools/toolchain.tar.gzac /work/
+COPY buildProject.sh /work/
+
 RUN apt-get update && \
-    apt-get upgrade && \
-    apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config && \
-    apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev
+	apt-get -y upgrade && \
+	apt-get install -y git build-essential   gcc  binutils  automake libtool make cmake pkg-config && \
+	apt-get install -y libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget 
+
+RUN  cd /work/ && \
+	cat toolchain.tar.gz* | tar xz && \
+	tar xzf ./toolchain_R2_EABI.tar.gz && \
+	rm /work/toolchain_R2_EABI.tar.gz && \
+	rm /work/toolchain.tar.gz*
 
 RUN  cd ~/ && \
-     git clone https://github.com/maikebing/build-minigui-3.2.git && \
-     cd ~/build-minigui-3.2/  && \
-     ./fetch-all.sh && \
-     cd gvfb && \
-     cmake .  && \
-     make; sudo make install  && \
-     cd .. && \
-     cd 3rd-party/chipmunk-5.3.1 && \
-     cmake . && \
-     make; sudo make install &&  \
-     cd ../.. && \
-     cd minigui-res && \
-     ./autogen.sh && \
-      ./configure && \
-       make install && \
-       cd ..  && \
-     ./build-all.sh 
-
-
-
-
+	wget http://www.minigui.org/downloads/freetype-2.3.9-fm20100818.tar.gz && \
+	tar xzf freetype-2.3.9-fm20100818.tar.gz && \
+	cd freetype-2.3.9-fm20100818 && \
+	./configure && \
+	make && \
+	make install && \
+	git clone https://github.com/maikebing/minigui2.0.4.git && \
+	cd  ./minigui2.4/  && \
+	chmod 777 ./rebuildx86 && \
+	./rebuildx86 && \
+	make clean  && \
+	make && \
+	make install  && \
+	make clean
