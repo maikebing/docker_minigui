@@ -2,6 +2,7 @@ FROM  i386/ubuntu:trusty
 COPY tools/toolchain.tar.gzaa /work/
 COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
+COPY tools/rebuildcurl.sh     /work/
 
 RUN DEBIAN_FRONTEND=noninteractive; \
 	apt-get -y -q update && \
@@ -37,9 +38,8 @@ RUN cd ~/ && \
 	wget https://curl.haxx.se/download/curl-7.67.0.tar.gz && \
 	tar xzf curl-7.67.0.tar.gz 
 	
-COPY tools/rebuildcurl.sh  ~/curl-7.67.0/rebuildcurl.sh
-
 RUN  cd ~/curl-7.67.0/ && \
+     cp  /work/rebuildcurl.sh  ./
 	chmod 777 ./rebuildcurl.sh && \
 	./rebuildcurl.sh arm && make install && \
 	./rebuildcurl.sh x86 && make install && \
