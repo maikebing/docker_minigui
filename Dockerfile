@@ -23,12 +23,26 @@ RUN  cd ~/ && \
 	./configure && \
 	make && \
 	make install && \
+	make clean  && \
 	cd ~/ && \
 	git clone https://github.com/maikebing/minigui2.0.4.git && \
 	cd  ./minigui2.0.4/  && \
 	chmod 777 ./rebuildx86 && \
 	./rebuildx86 && \
-	make clean  && \
 	make && \
 	make install  && \
 	make clean
+	
+RUN cd ~/ && \
+	wget https://curl.haxx.se/download/curl-7.67.0.tar.gz && \
+	tar xzf curl-7.67.0.tar.gz && \
+	cd curl-7.67.0 
+COPY tools/rebuildcurl.sh  ~/curl-7.67.0/
+
+RUN  ~/curl-7.67.0/ && \
+	./rebuildcurl.sh arm && make install && \
+	./rebuildcurl.sh x86 && make install && \
+	make clean 
+
+RUN rm ~/curl-7.67.0 -R && rm ~/freetype-2.3.9-fm20100818  -R && rm ~/minigui2.0.4  -R  
+	
