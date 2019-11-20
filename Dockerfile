@@ -39,7 +39,7 @@ RUN cd ~/ && \
 	tar xzf curl-7.67.0.tar.gz 
 	
 RUN  cd ~/curl-7.67.0/ && \
-     cp  /work/rebuildcurl.sh  ./
+     cp  /work/rebuildcurl.sh  ./ && \
 	chmod 777 ./rebuildcurl.sh && \
 	./rebuildcurl.sh arm && make install && \
 	./rebuildcurl.sh x86 && make install && \
