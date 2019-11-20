@@ -39,7 +39,8 @@ RUN cd ~/ && \
 	cd curl-7.67.0 
 COPY tools/rebuildcurl.sh  ~/curl-7.67.0/
 
-RUN  ~/curl-7.67.0/ && \
+RUN  cd ~/curl-7.67.0/ && \
+	chmod 777 ./rebuildcurl.sh && \
 	./rebuildcurl.sh arm && make install && \
 	./rebuildcurl.sh x86 && make install && \
 	make clean 
