@@ -35,9 +35,9 @@ RUN  cd ~/ && \
 	
 RUN cd ~/ && \
 	wget https://curl.haxx.se/download/curl-7.67.0.tar.gz && \
-	tar xzf curl-7.67.0.tar.gz && \
-	cd curl-7.67.0 
-COPY tools/rebuildcurl.sh  ~/curl-7.67.0/
+	tar xzf curl-7.67.0.tar.gz 
+	
+COPY tools/rebuildcurl.sh  ~/curl-7.67.0/rebuildcurl.sh
 
 RUN  cd ~/curl-7.67.0/ && \
 	chmod 777 ./rebuildcurl.sh && \
