@@ -5,7 +5,6 @@ COPY tools/toolchain.tar.gzac /work/
 COPY tools/rebuildcurl.sh     /work/
 
 RUN DEBIAN_FRONTEND=noninteractive; \
-	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian  wheezy main" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian  wheezy contrib" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian  wheezy non-free" >> /etc/apt/sources.list && \
