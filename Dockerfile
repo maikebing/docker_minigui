@@ -12,10 +12,9 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/main" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/contrib" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/non-free" >> /etc/apt/sources.list && \
-
-	apt-get -y -q update && \
-	apt-get install -y -q  gcc  binutils  automake libtool make cmake pkg-config busybox-static && \
-	apt-get install -y -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget && \
+	apt-get -y  --force-yes -q update && \
+	apt-get install -y  --force-yes -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config busybox-static && \
+	apt-get install -y  --force-yes -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget && \
 	apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
 
 RUN  cd /work/ && \
