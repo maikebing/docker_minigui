@@ -1,4 +1,4 @@
-FROM i386/ubuntu:trusty
+FROM i386/debian:wheezy
 COPY tools/toolchain.tar.gzaa /work/
 COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
