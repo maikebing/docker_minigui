@@ -4,8 +4,7 @@ COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
 COPY tools/rebuildcurl.sh     /work/
 
-RUN DEBIAN_FRONTEND=noninteractive; \
-	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources.list && \
+RUN 	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian  wheezy contrib" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian  wheezy non-free" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/main" >> /etc/apt/sources.list && \
@@ -14,7 +13,8 @@ RUN DEBIAN_FRONTEND=noninteractive; \
 	apt-get -y  --force-yes -q update && \
 	apt-get install -y  --force-yes -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config busybox-static && \
 	apt-get install -y  --force-yes -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget && \
-	apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
+        apt-get install -y --force-yes -q openssh-server && \
+	apt-get clean && apt-get autoremove   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
 
 RUN  cd /work/ && \
 	cat toolchain.tar.gz* | tar xz && \
@@ -50,5 +50,17 @@ RUN  cd ~/curl-7.67.0/ && \
 	./rebuildcurl.sh x86 && make install && \
 	make clean 
 
-RUN rm ~/curl-7.67.0 -R && rm ~/freetype-2.3.9-fm20100818  -R && rm ~/minigui2.0.4  -R  
-	
+RUN rm ~/curl-7.67.0* -R && rm ~/freetype-2.3.9-fm20100818*  -R && rm ~/minigui2.0.4*  -R  
+
+RUN mkdir /var/run/sshd
+RUN echo 'root:1-q2-w3-e4-r5-t' | chpasswd
+RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]	
