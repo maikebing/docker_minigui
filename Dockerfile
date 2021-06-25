@@ -12,7 +12,7 @@ RUN 	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/non-free" >> /etc/apt/sources.list && \
 	apt-get -y  --force-yes -q update && \
 	apt-get install -y  --force-yes -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config busybox-static && \
-	apt-get install -y  --force-yes -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget && \
+	apt-get install -y  --force-yes -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget  libconfig-dev && \
         apt-get install -y --force-yes -q openssh-server && \
 	apt-get install -y --force-yes -q gdb gdbserver && \
 	apt-get clean && apt-get autoremove   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
