@@ -23,6 +23,8 @@ RUN  cd /work/ && \
 	rm /work/toolchain_R2_EABI.tar.gz && \
 	rm /work/toolchain.tar.gz*
 
+RUN ssh-keyscan -t rsa github.com 2>&1 >> /root/.ssh/known_hosts
+
 RUN  cd ~/ && \
 	wget http://www.minigui.org/downloads/freetype-2.3.9-fm20100818.tar.gz && \
 	tar xzf freetype-2.3.9-fm20100818.tar.gz && \
