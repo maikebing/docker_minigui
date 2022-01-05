@@ -41,7 +41,7 @@ RUN  cd ~/ && \
 	make clean
 	
 RUN cd ~/ && \
-	wget https://curl.haxx.se/download/curl-7.67.0.tar.gz && \
+	wget https://curl.haxx.se/download/curl-7.67.0.tar.gz  --no-check-certificate  && \
 	tar xzf curl-7.67.0.tar.gz 
 	
 RUN  cd ~/curl-7.67.0/ && \
