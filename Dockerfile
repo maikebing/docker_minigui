@@ -3,14 +3,8 @@ COPY tools/toolchain.tar.gzaa /work/
 COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
 COPY tools/rebuildcurl.sh     /work/
-
-RUN 	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources.list && \
-	echo "deb http://archive.debian.org/debian  wheezy contrib" >> /etc/apt/sources.list && \
-	echo "deb http://archive.debian.org/debian  wheezy non-free" >> /etc/apt/sources.list && \
-	echo "deb http://archive.debian.org/debian-security wheezy  updates/main" >> /etc/apt/sources.list && \
-	echo "deb http://archive.debian.org/debian-security wheezy  updates/contrib" >> /etc/apt/sources.list && \
-	echo "deb http://archive.debian.org/debian-security wheezy  updates/non-free" >> /etc/apt/sources.list && \
-	apt-get -y  --force-yes -q update && \
+ 
+RUN 	apt-get -y  --force-yes -q update && \
 	apt-get install -y  --force-yes -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config busybox-static  ca-certificates && \
 	apt-get install -y  --force-yes -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget  libconfig-dev && \
         apt-get install -y --force-yes -q openssh-server && \
