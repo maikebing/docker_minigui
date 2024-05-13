@@ -1,8 +1,9 @@
 FROM i386/debian:wheezy
-COPY tools/toolchain.tar.gzaa /work/
-COPY tools/toolchain.tar.gzab /work/
-COPY tools/toolchain.tar.gzac /work/
-COPY tools/rebuildcurl.sh     /work/
+COPY tools/arm-eabi-eMTC.tar.zip /work/
+COPY tools/arm-eabi-eMTC.tar.z01 /work/
+COPY tools/arm-eabi-eMTC.tar.z02 /work/
+COPY tools/arm-eabi-eMTC.tar.z03 /work/
+COPY tools/arm-eabi-eMTC.tar.z04 /work/
 
 RUN 	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian  wheezy contrib" >> /etc/apt/sources.list && \
@@ -10,18 +11,20 @@ RUN 	echo "deb http://archive.debian.org/debian  wheezy main" > /etc/apt/sources
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/main" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/contrib" >> /etc/apt/sources.list && \
 	echo "deb http://archive.debian.org/debian-security wheezy  updates/non-free" >> /etc/apt/sources.list && \
-	apt-get -y  --force-yes -q update && \
-	apt-get install -y  --force-yes -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config busybox-static && \
+	apt-get -y  --force-yes -q update && apt-get  install  -y --force-yes   -q  apt-transport-https ca-certificates &&   apt-get install ca-certificates && \
+	apt-get install -y  --force-yes -q git build-essential   gcc  binutils  automake libtool make cmake pkg-config busybox-static unzip zip && \
 	apt-get install -y  --force-yes -q libgtk2.0-dev libjpeg-dev libpng12-dev libfreetype6-dev libsqlite3-dev libxml2-dev wget  libconfig-dev && \
-        apt-get install -y --force-yes -q openssh-server && \
+    apt-get install -y --force-yes -q openssh-server && \
 	apt-get install -y --force-yes -q gdb gdbserver && \
 	apt-get clean && apt-get autoremove   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	
 
 RUN  cd /work/ && \
-	cat toolchain.tar.gz* | tar xz && \
-	tar xzf ./toolchain_R2_EABI.tar.gz && \
-	rm /work/toolchain_R2_EABI.tar.gz && \
-	rm /work/toolchain.tar.gz*
+	cat  arm-eabi-eMTC.tar.* >  arm-eabi-eMTC_all.zip && \
+	zip -FF  arm-eabi-eMTC_all.zip  --out arm-eabi-eMTC_all1.zip && \
+	unzip -FF arm-eabi-eMTC_all1.zip && mv arm-eabi-eMTC.tar.gz1 arm-eabi-eMTC.tar.gz  && \
+	tar xzf ./arm-eabi-eMTC.tar.gz && \
+	rm /work/arm-eabi-eMTC.tar.gz && \
+	rm /work/arm-eabi-eMTC.tar.z*
 	
 RUN  cd ~/ && \
 	wget http://www.minigui.org/downloads/freetype-2.3.9-fm20100818.tar.gz && \
@@ -41,7 +44,7 @@ RUN  cd ~/ && \
 	make clean
 	
 RUN cd ~/ && \
-	wget https://curl.haxx.se/download/curl-7.67.0.tar.gz && \
+	wget https://curl.se/download/curl-7.80.0.tar.gz && \
 	tar xzf curl-7.67.0.tar.gz 
 	
 RUN  cd ~/curl-7.67.0/ && \
