@@ -55,9 +55,9 @@ RUN  cd ~/ && tar xzf  ~/curl-7.67.0.tar.gz && \
 	make clean  &&\
 	rm ~/curl-7.67.0* -R 
 	
-RUN  cd ~/ && https://github.com/confluentinc/librdkafka.git && \
+RUN  cd ~/ && git clone https://github.com/confluentinc/librdkafka.git && \
 	cd ~/librdkafka && \
-     git checkout  v2.13.2 -f ./ && \
+     git checkout  v2.132.2 -f ./ && \
 	./configure --cc=/work/toolchain_R2_EABI/usr/bin/arm-none-linux-gnueabi-gcc \
 				--cxx=/work/toolchain_R2_EABI/usr/bin/arm-none-linux-gnueabi-g++ \
 				--arch=arm --target=arm-unknown-linux-gnueabi --host=arm-unknown-linux-gnueabi --build=i686-pc-linux-gnu \
