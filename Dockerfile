@@ -66,7 +66,7 @@ RUN  cd ~/ && git clone https://github.com/confluentinc/librdkafka.git && \
 				--enable-static \
 				--disable-ssl  --disable-gssapi  --disable-sasl  --disable-curl  --disable-lz4-ext   --disable-lz4   --disable-regex-ext  --disable-c11threads   \
 				--disable-syslog --disable-valgrind  && \
-	./make  && make install && \
+	make && make install && \
 	make clean  &&\
 	./configure      --CFLAGS="-g0"   --enable-static --disable-ssl  --disable-gssapi  --disable-sasl  --disable-curl  --disable-lz4-ext   --disable-lz4   --disable-regex-ext  --disable-c11threads    --disable-syslog --disable-valgrind  
 	./make  && make install && \
