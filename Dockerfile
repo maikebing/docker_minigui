@@ -32,7 +32,7 @@ RUN  cd ~/ && \
 	make && \
 	make install && \
 	make clean  && \
-	rm ~/freetype-2.3.9-fm20100818*  -R && 
+	rm ~/freetype-2.3.9-fm20100818*  -R && \
 	cd ~/ && \
 	git clone https://github.com/maikebing/minigui2.0.4.git && \
 	cd  ./minigui2.0.4/  && \
