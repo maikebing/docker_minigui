@@ -32,6 +32,7 @@ RUN  cd ~/ && \
 	make && \
 	make install && \
 	make clean  && \
+	rm ~/freetype-2.3.9-fm20100818*  -R && \
 	cd ~/ && \
 	git clone https://github.com/maikebing/minigui2.0.4.git && \
 	cd  ./minigui2.0.4/  && \
@@ -39,20 +40,38 @@ RUN  cd ~/ && \
 	./rebuildx86 && \
 	make && \
 	make install  && \
-	make clean
+	make clean  &&\
+	rm ~/minigui2.0.4*  -R 
 	
  
 
-RUN  cd ~/ && tar xzf  ~/curl-7.67.0.tar.gz
-RUN  ls  ~/ && \
+RUN  cd ~/ && tar xzf  ~/curl-7.67.0.tar.gz && \
+     ls  ~/ && \
 	cd ~/curl-7.67.0 && \
      cp  /work/rebuildcurl.sh  ./ && \
 	chmod 777 ./rebuildcurl.sh && \
 	./rebuildcurl.sh arm && make install && \
 	./rebuildcurl.sh x86 && make install && \
-	make clean 
-
-RUN rm ~/curl-7.67.0* -R && rm ~/freetype-2.3.9-fm20100818*  -R && rm ~/minigui2.0.4*  -R  
+	make clean  &&\
+	rm ~/curl-7.67.0* -R 
+	
+RUN  cd ~/ && git clone https://github.com/confluentinc/librdkafka.git && \
+	cd ~/librdkafka && \
+     git checkout  v2.132.2 -f ./ && \
+	./configure --cc=/work/toolchain_R2_EABI/usr/bin/arm-none-linux-gnueabi-gcc \
+				--cxx=/work/toolchain_R2_EABI/usr/bin/arm-none-linux-gnueabi-g++ \
+				--arch=arm --target=arm-unknown-linux-gnueabi --host=arm-unknown-linux-gnueabi --build=i686-pc-linux-gnu \
+				--prefix=/work/toolchain_R2_EABI/usr/arm-unknown-linux-gnueabi/sysroot/usr --pkg-config-path=/work/toolchain_R2_EABI/usr/bin/pkg-config  \
+				--CFLAGS="-g0" --LDFLAGS="-L/work/toolchain_R2_EABI/lib -L/work/toolchain_R2_EABI/usr/lib -Wl,-rpath,/work/toolchain_R2_EABI/usr/lib" \
+				--enable-static \
+				--disable-ssl  --disable-gssapi  --disable-sasl  --disable-curl  --disable-lz4-ext   --disable-lz4   --disable-regex-ext  --disable-c11threads   \
+				--disable-syslog --disable-valgrind  && \
+	make && make install && \
+	make clean  &&\
+	./configure      --CFLAGS="-g0"   --enable-static --disable-ssl  --disable-gssapi  --disable-sasl  --disable-curl  --disable-lz4-ext   --disable-lz4   --disable-regex-ext  --disable-c11threads    --disable-syslog --disable-valgrind  
+	./make  && make install && \
+	make clean  &&\
+	rm  ~/librdkafka -R 
 
 RUN mkdir /var/run/sshd
 RUN echo 'root:1-q2-w3-e4-r5-t' | chpasswd
