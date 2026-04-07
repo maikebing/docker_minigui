@@ -1,4 +1,5 @@
-FROM --platform=linux/386 i386/debian:wheezy
+ARG BASE_PLATFORM=linux/386
+FROM --platform=${BASE_PLATFORM} i386/debian:wheezy
 COPY tools/toolchain.tar.gzaa /work/
 COPY tools/toolchain.tar.gzab /work/
 COPY tools/toolchain.tar.gzac /work/
@@ -82,6 +83,12 @@ RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/s
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
 
+RUN echo "/usr/local/lib" > /etc/ld.so.conf.d/usr-local.conf && ldconfig
+
+ENV LD_LIBRARY_PATH="/usr/local/lib"
+ENV LIBRARY_PATH="/usr/local/lib"
+ENV PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig"
+ENV CMAKE_PREFIX_PATH="/usr/local"
 ENV NOTVISIBLE="in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
